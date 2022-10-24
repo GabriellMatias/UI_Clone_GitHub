@@ -1,5 +1,6 @@
 import { ProfileData } from "../../components/ProfileData";
-import { LeftSide, MainContainer, ProfileContainer, RightSide } from "./style";
+import { RepoCard } from "../../components/ReporCard";
+import { LeftSide, MainContainer, ProfileContainer, RepositoryListContainer, RightSide } from "./style";
 
 
 
@@ -17,14 +18,35 @@ export function Profile(){
           name={"Gabriel Matias"}
           following={8}
           company={"AGU"}
-          location={"Brasilia-DF"}
+          locationgit={"Brasilia-DF"}
           email={"gabriel.goiasat@gmail.com"}
           blog={'https://www.linkedin.com/in/gabriell-matias-03b98421a/'}
           />
 
         </LeftSide>
 
-        <RightSide></RightSide>
+        <RightSide>
+          <RepositoryListContainer>
+            <h2>Random Repos</h2>
+
+            <div>
+              {
+                /* refazer com um array de repositorios */
+                [1,2,3,4,5,6].map(n=>(
+                  <RepoCard
+                  key={n}
+                  username={"Matias"}
+                  reporname={"github_UI_clone"}
+                  desciption={' k k k k k kj'}
+                  language={'Typescript'}
+                  stars={8}
+                  forks={10}
+                  />
+                ))
+              }
+            </div>
+          </RepositoryListContainer>
+        </RightSide>
 
       </MainContainer>
     </ProfileContainer>
