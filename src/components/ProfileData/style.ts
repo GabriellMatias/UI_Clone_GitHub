@@ -45,6 +45,7 @@ export const Avatar = styled.img`
   /* reafazer calculo*/
   width: 10%;
   border-radius: 50%;
+  margin-bottom: 1.6rem;
   @media(min-width:768px){
     width: 100%;
   } 

@@ -1,7 +1,5 @@
-import { ReactNode } from "react";
 
-
-export function Repository(children:ReactNode){
+export function Repository(){
   return(
     <h1>asd</h1>
   )
