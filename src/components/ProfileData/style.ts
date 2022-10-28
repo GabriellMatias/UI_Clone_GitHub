@@ -43,10 +43,12 @@ export const Flex = styled.div`
 `;
 export const Avatar = styled.img`
   /* reafazer calculo*/
-  width: 10rem;
+  width: 16rem;
   border-radius: 50%;
+  
   margin-bottom: 1.6rem;
   @media(min-width:768px){
+    margin-top: -3.4rem;
     width: 100%;
   } 
 `;

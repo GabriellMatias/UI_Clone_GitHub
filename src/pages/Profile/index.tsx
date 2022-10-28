@@ -28,7 +28,9 @@ export function Profile() {
     <ProfileContainer>
       <Tab className="desktop">
         <div className="wrapper">
+        <span className="offset"></span>
           <TabContent />
+          
         </div>
         <span className="line"></span>
       </Tab>
