@@ -1,7 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from "styled-components";
+import { RiBookMarkLine } from "react-icons/ri";
 
 export const ProfileContainer = styled.div`
   padding: 1.6rem 2.4rem;
+  overflow: hidden;
 `;
 
 export const MainContainer = styled.main`
@@ -51,4 +53,59 @@ export const CalendarHeading = styled.span`
   font-size: 1.6rem;
   display: inline-flex;
   margin: 3.9rem 0 0.9rem;
+`;
+
+export const Tab = styled.div`
+
+flex-direction: column;
+  background: var(--primary);
+  .content {
+    display: flex;
+    align-items: center;
+    width: min-content;
+    padding: 1.4rem 1.6rem;
+    border-bottom: 2px solid var(--orange);
+
+    .label {
+      font-size: 1.4rem;
+      padding: 0.7px;
+      font-weight: 600;
+    }
+
+    .number {
+      font-size: 1.2rem;
+      background: var(--ticker);
+      padding: 0.2rem 0.6rem;
+      border-radius: 24px;
+    }
+  }
+  .line {
+    display: flex;
+    width: 200vw;
+    border: 1px solid var(--border);
+    margin-left: -50vw;
+  }
+  /* CHILD OF TAB, PLEASE USE &*/
+  &.mobile {
+    margin-top: 2.4rem;
+    .content { 
+      margin: 0 auto;
+    }
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+  &.desktop{
+    display: none;
+    @media(min-width:768px){
+      /* resetadad como se nao tivesse mexido em nada*/
+      display: unset; 
+    }
+  }
+`;
+
+export const RepoIcon = styled(RiBookMarkLine)`
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-right: 0.4rem;
 `;

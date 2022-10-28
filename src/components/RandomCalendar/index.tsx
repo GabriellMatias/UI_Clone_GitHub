@@ -1,6 +1,6 @@
 import { RandomCalendarContainer } from "./style";
 import HeatMap from "react-calendar-heatmap";
-import { clamp, subYears } from "date-fns";
+import { subYears, isBefore, isSameDay, addDays } from "date-fns";
 
 type HeatMapValue = { date: Date; count: number };
 
@@ -8,17 +8,13 @@ export function RandomCalendar(props: any) {
   const startDate = subYears(new Date(), 1);
   const endDate = new Date();
 
-  const values: HeatMapValue[] = [];
-  /*imutabilidade??*/
-  values.push({ date: new Date(), count: 4 });
-
   return (
     <RandomCalendarContainer>
       <div className="wrapper">
         <HeatMap
           startDate={startDate}
           endDate={endDate}
-          values={values}
+          values={generateHeatMapValues(startDate, endDate)}
           gutterSize={3.5}
           classForValue={(item: HeatMapValue) => {
             let clampedCount = 0;
@@ -36,3 +32,17 @@ export function RandomCalendar(props: any) {
     </RandomCalendarContainer>
   );
 }
+
+/* gerando commits aleatorios para HeatMap*/
+const generateHeatMapValues = (startDate: Date, endDate: Date) => {
+  const values: HeatMapValue[] = [];
+  let currentDate = startDate;
+
+  while (isBefore(currentDate, endDate) || isSameDay(currentDate, endDate)) {
+    const count = Math.floor(Math.random() * 4);
+    values.push({ date: currentDate, count: count });
+    currentDate = addDays(currentDate, 1);
+  }
+  return values;
+};
+

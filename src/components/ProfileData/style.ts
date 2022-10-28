@@ -20,7 +20,7 @@ export const Flex = styled.div`
   display: flex;
   align-items: center;
   div {
-    /* margin-left: 2.4rem; */
+    margin-left: 2.4rem; 
     h1 {
       font-size: 2.6rem;
       line-height: 1.25;
@@ -43,7 +43,7 @@ export const Flex = styled.div`
 `;
 export const Avatar = styled.img`
   /* reafazer calculo*/
-  width: 10%;
+  width: 10rem;
   border-radius: 50%;
   margin-bottom: 1.6rem;
   @media(min-width:768px){
