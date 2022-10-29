@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { APIRepor, APIuser } from "../../@types";
 import { ProfileData } from "../../components/ProfileData";
 import { RandomCalendar } from "../../components/RandomCalendar";
 import { RepoCard } from "../../components/ReporCard";
@@ -12,14 +15,55 @@ import {
   Tab,
 } from "./style";
 
+interface dataProps {
+  user?: APIuser;
+  repos?: APIRepor[];
+  erro?: string;
+}
+
 export function Profile() {
+  const [data, setData] = useState<dataProps>();
+  const { username = "GabriellMatias" } = useParams();
+
+  useEffect(() => {
+    Promise.all([
+      fetch(`https://api.github.com/users/${username}`),
+      fetch(`https://api.github.com/users/${username}/repos`),
+    ]).then(async (responses) => {
+      const [userResponse, reposResponse] = responses;
+
+      if (userResponse.status === 404) {
+        setData({ erro: "User not Found!" });
+        return;
+      }
+
+      const user = await userResponse.json();
+      const repos = await reposResponse.json();
+
+      const sortiesRepos = repos.sort(() => 0.5 - Math.random());
+      const slicedRepos = sortiesRepos.slice(0, 6);
+
+      setData({
+        user,
+        repos: slicedRepos,
+      });
+    });
+  }, [username]);
+
+  if (data?.erro) {
+    return <h1>{data.erro}</h1>;
+  }
+  if (!data?.user || !data?.repos) {
+    return <h1>Loading..</h1>;
+  }
+
   /* retorna um tipo de mini componente do react*/
   const TabContent = () => {
     return (
       <div className="content">
         <RepoIcon />
         <span className="label"> Repositories</span>
-        <span className="number">29</span>
+        <span className="number">{data.user?.public_repos}</span>
       </div>
     );
   };
@@ -28,9 +72,8 @@ export function Profile() {
     <ProfileContainer>
       <Tab className="desktop">
         <div className="wrapper">
-        <span className="offset"></span>
+          <span className="offset"></span>
           <TabContent />
-          
         </div>
         <span className="line"></span>
       </Tab>
@@ -38,15 +81,15 @@ export function Profile() {
       <MainContainer>
         <LeftSide>
           <ProfileData
-            username={"Matias"}
-            avatarUrl={"https://github.com/GabriellMatias.png"}
-            followers={80}
-            name={"Gabriel Matias"}
+            username={data.user.login}
+            avatarUrl={data.user.avatar_url}
+            followers={data.user.followers}
+            name={data.user.name}
             following={8}
-            company={"AGU"}
-            locationgit={"Brasilia-DF"}
-            email={"gabriel.goiasat@gmail.com"}
-            blog={"https://www.linkedin.com/in/gabriell-matias-03b98421a/"}
+            company={data.user.company}
+            locationgit={data.user.location}
+            email={data.user.email}
+            blog={data.user.blog}
           />
         </LeftSide>
 
@@ -63,15 +106,15 @@ export function Profile() {
             <div>
               {
                 /* refazer com um array de repositorios */
-                [1, 2, 3, 4, 5, 6].map((n) => (
+                data.repos.map((item) => (
                   <RepoCard
-                    key={n}
-                    username={"Matias"}
-                    reporname={"github_UI_clone"}
-                    desciption={" k k k k k kj"}
-                    language={"Typescript"}
-                    stars={8}
-                    forks={10}
+                    key={Number(item.name)}
+                    username={item.owner.login}
+                    reporname={item.name}
+                    desciption={item.description}
+                    language={item.language}
+                    stars={item.startgazes_count}
+                    forks={item.forks}
                   />
                 ))
               }

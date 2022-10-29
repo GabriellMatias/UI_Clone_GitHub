@@ -28,9 +28,14 @@ export const SearchForm = styled.form`
 `
 
 export const GithubLogo = styled(FaGithub)`
+  cursor: pointer;
+
   fill: var(--logo);
   width: 3.2rem;
   height: 3.2rem;
   flex-shrink: 0;
 
-`
+  &:hover {
+    opacity: 0.8;
+  }
+`;
