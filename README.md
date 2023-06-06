@@ -1,6 +1,7 @@
 <h1 align="center"> 
-  <img width="150px" src="https://user-images.githubusercontent.com/80908772/194680070-87fbc668-aee7-40d4-98d9-64ba84bf08c5.png"/>
+  <img  src="https://github.com/GabriellMatias/UI_Clone_GitHub/assets/80908772/1fd56317-5edb-4daf-9e33-0d72a89ed8dd"/>
 </h1>
+
 <br/>
 
 ## 💻 Owerview
